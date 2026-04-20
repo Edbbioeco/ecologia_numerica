@@ -12,6 +12,8 @@ library(ggbeeswarm)
 
 library(ggview)
 
+library(magrittr)
+
 # Dados ----
 
 ## Importar ----
