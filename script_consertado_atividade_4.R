@@ -161,3 +161,88 @@ floresta[is.na(floresta)] <- 0
 floresta
 
 floresta |> dplyr::glimpse()
+
+### Índices de diversidade ----
+
+floresta_df_div <- data.frame(com = floresta |> rownames(),
+                             riqueza = floresta |>
+                               vegan::specnumber(),
+                             shannon = floresta |>
+                               vegan::diversity() |>
+                               as.numeric(),
+                             simpson = floresta |>
+                               vegan::diversity(index = "simpson") |>
+                               as.numeric()) |>
+  dplyr::bind_cols(floresta |>
+                     vegan::renyi(scales = 1:2, hill = TRUE)) |>
+  dplyr::rename("Q1" = `1`,
+                "Q2" = `2`) |>
+  dplyr::mutate(eqpielou = simpson / exp(shannon),
+                eqhill = Q2 / Q1,
+                tratamento = com |> stringr::str_sub(start = 1, end = 1)) |>
+  tidyr::drop_na()
+
+floresta_df_div
+
+### ANOVA ----
+
+### Criar modelo ----
+
+criar_anovas <- function(var){
+
+  paste0("Criado o modelo para: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova <- aov(floresta_df_div[[var]] ~ tratamento, data = floresta_df_div)
+
+  paste0("Pressupostos do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    performance::check_model(check = c("normality",
+                                       "homogeneity")) |>
+    print()
+
+  anova |>
+    performance::check_heteroscedasticity() |>
+    print()
+
+  anova |>
+    performance::check_normality() |>
+    print()
+
+  paste0("Estatísticas do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    summary() |>
+    print()
+
+}
+
+var <- floresta_df_div |>
+  dplyr::select(2:8) |>
+  names()
+
+var
+
+purrr::walk(var, criar_anovas)
+
+### Gráficos ----
+
+floresta_df_div |>
+  tidyr::pivot_longer(cols = 2:8,
+                      names_to = "div",
+                      values_to = "diversidade") |>
+  ggplot(aes(tratamento, diversidade)) +
+  ggbeeswarm::geom_quasirandom(size = 3,
+                               shape= 21,
+                               stroke = 1,
+                               fill = "gray40",
+                               width = 0.1) +
+  facet_wrap(~div, scales = "free_y") +
+  theme_classic() +
+  ggview::canvas(height = 10, width = 12)
