@@ -6,7 +6,7 @@ library(vegan)
 
 # Dados ----
 
-## Importar ----
+Importar ----
 
 dados <- list.files(path = "./dados",
                     full.names = TRUE)
@@ -42,3 +42,14 @@ importar_dados <- function(dados){
 }
 
 purrr::map(dados, importar_dados)
+
+## Visualizar ----
+
+dados |>
+  stringr::str_remove_all("./dados/|.txt|.csv") |>
+  mget(envir = globalenv())
+
+dados |>
+  stringr::str_remove_all("./dados/|.txt|.csv") |>
+  mget(envir = globalenv()) |>
+  dplyr::glimpse()
