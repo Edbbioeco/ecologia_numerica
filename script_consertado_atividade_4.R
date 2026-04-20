@@ -72,3 +72,50 @@ riqueza_df_div <- data.frame(com = riqueza$sp1,
   tidyr::drop_na()
 
 riqueza_df_div
+
+### ANOVA ----
+
+### Criar modelo ----
+
+criar_anovas <- function(var){
+
+  paste0("Criado o modelo para: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova <- aov(riqueza_df_div[[var]] ~ tratamento, data = riqueza_df_div)
+
+  paste0("Pressupostos do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    performance::check_model(check = c("normality",
+                                       "homogeneity")) |>
+    print()
+
+  anova |>
+    performance::check_heteroscedasticity() |>
+    print()
+
+  anova |>
+    performance::check_normality() |>
+    print()
+
+  paste0("Estatísticas do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    summary() |>
+    print()
+
+}
+
+var <- riqueza_df_div |>
+  dplyr::select(2:8) |>
+  names()
+
+var
+
+purrr::map(var, criar_anovas)
