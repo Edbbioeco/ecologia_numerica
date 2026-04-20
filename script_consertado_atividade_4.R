@@ -6,14 +6,39 @@ library(vegan)
 
 # Dados ----
 
-## Riqueza ----
-
 ### Importar ----
 
-riqueza <- readr::read_table("./dados/riqueza.txt")
+dados <- list.files(path = "./dados",
+                    full.names = TRUE)
 
-### Visualizar ----
+dados
 
-riqueza
+importar_dados <- function(dados){
 
-riqueza |> dplyr::glimpse()
+  if(dados |> stringr::str_detect(".txt")){
+
+    dado_importado <- readr::read_table(dados)
+
+    nome <- dados |>
+      stringr::str_remove_all("./dados/|.txt")
+
+    assign(nome,
+           dado_importado,
+           envir = globalenv())
+
+  } else if(dados |> stringr::str_detect(".csv")){
+
+      dado_importado <- readr::read_csv(dados)
+
+      nome <- dados |>
+        stringr::str_remove_all("./dados/|.csv")
+
+      assign(nome,
+             dado_importado,
+             envir = globalenv())
+
+    }
+
+}
+
+purrr::map(dados, importar_dados)
