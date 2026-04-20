@@ -119,3 +119,19 @@ var <- riqueza_df_div |>
 var
 
 purrr::map(var, criar_anovas)
+
+### Gráficos ----
+
+riqueza_df_div |>
+  tidyr::pivot_longer(cols = 2:8,
+                      names_to = "div",
+                      values_to = "diversidade") |>
+  ggplot(aes(tratamento, diversidade)) +
+  ggbeeswarm::geom_quasirandom(size = 3,
+                               shape= 21,
+                               stroke = 1,
+                               fill = "gray40",
+                               width = 0.1) +
+  facet_wrap(~div, scales = "free_y") +
+  theme_classic() +
+  ggview::canvas(height = 10, width = 12)
