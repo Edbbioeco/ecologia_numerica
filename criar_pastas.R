@@ -10,6 +10,8 @@ dir.create("dados")
 
 ### Listar scripts ----
 
-scripts <- list.files(pattern = ".R$|.Rmd$")
+scripts <- list.files(pattern = ".R$|.Rmd$") |>
+  stringr::str_subset(pattern = "^criar_pastas",
+                      negate = TRUE)
 
 scripts
