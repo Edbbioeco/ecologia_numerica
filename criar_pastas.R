@@ -15,3 +15,7 @@ scripts <- list.files(pattern = ".R$|.Rmd$") |>
                       negate = TRUE)
 
 scripts
+
+### Renomear scripts ----
+
+file.rename(scripts, paste0("./scripts/", scripts))
