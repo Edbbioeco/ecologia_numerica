@@ -6,11 +6,13 @@ library(vegan)
 
 # Dados ----
 
-## Importar ----
+## Riqueza ----
+
+### Importar ----
 
 riqueza <- readr::read_table("./dados/riqueza.txt")
 
-## Visualizar ----
+### Visualizar ----
 
 riqueza
 
