@@ -62,7 +62,7 @@ riqueza_df_div <- data.frame(com = riqueza$sp1,
                      vegan::renyi(scales = 1:2, hill = TRUE)) |>
   dplyr::rename("Q1" = `1`,
                 "Q2" = `2`) |>
-  dplyr::mutate(eqpielou = simpson / log(shannon),
+  dplyr::mutate(eqpielou = simpson / exp(shannon),
                 eqhill = Q2 / Q1,
                 tratamento = dplyr::case_when(com |>
                                                 stringr::str_detect("a$") ~ "A",
