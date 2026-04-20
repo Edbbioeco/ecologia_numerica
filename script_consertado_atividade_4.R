@@ -40,3 +40,35 @@ dados |>
   dplyr::glimpse()
 
 # Diversidade ----
+
+## Dataset: riqueza ----
+
+### Índices de diversidade ----
+
+riqueza_df_div <- data.frame(com = riqueza$sp1,
+                             riqueza = riqueza |>
+                               dplyr::select(-1) |>
+                               vegan::specnumber(),
+                             shannon = riqueza |>
+                               dplyr::select(-1) |>
+                               vegan::diversity() |>
+                               as.numeric(),
+                             simpson = riqueza |>
+                               dplyr::select(-1) |>
+                               vegan::diversity(index = "simpson") |>
+                               as.numeric()) |>
+  dplyr::bind_cols(riqueza |>
+                     dplyr::select(-1) |>
+                     vegan::renyi(scales = 1:2, hill = TRUE)) |>
+  dplyr::rename("Q1" = `1`,
+                "Q2" = `2`) |>
+  dplyr::mutate(eqpielou = simpson / log(shannon),
+                eqhill = Q2 / Q1,
+                tratamento = dplyr::case_when(com |>
+                                                stringr::str_detect("a$") ~ "A",
+                                              com |>
+                                                stringr::str_detect("b$") ~ "B",
+                                              .default = "C")) |>
+  tidyr::drop_na()
+
+riqueza_df_div
