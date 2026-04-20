@@ -27,3 +27,7 @@ file.rename(scripts, paste0("./scripts/", scripts))
 dados <- list.files(pattern = ".csv$|.txt$")
 
 dados
+
+### Renomear scripts ----
+
+file.rename(dados, paste0("./dados/", dados))
