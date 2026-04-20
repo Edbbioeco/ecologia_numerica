@@ -141,3 +141,23 @@ riqueza_df_div |>
   facet_wrap(~div, scales = "free_y") +
   theme_classic() +
   ggview::canvas(height = 10, width = 12)
+
+## Dataset: floresta ----
+
+### Tratar data frame do dataset floresta ----
+
+floresta <- floresta |>
+  t() %>%
+  .[-1, ] |>
+  magrittr::set_colnames(floresta |>
+                           t() %>%
+                           .[1, ]) |>
+  as.data.frame() |>
+  dplyr::mutate(dplyr::across(.cols = 1:87,
+                              .fns = ~as.numeric(.)))
+
+floresta[is.na(floresta)] <- 0
+
+floresta
+
+floresta |> dplyr::glimpse()
