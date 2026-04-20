@@ -4,6 +4,12 @@ library(tidyverse)
 
 library(vegan)
 
+library(crayon)
+
+library(performance)
+
+library(ggview)
+
 # Dados ----
 
 ## Importar ----
