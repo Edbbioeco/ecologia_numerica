@@ -1,0 +1,38 @@
+---
+title: "Exercício 1"
+author: "Edson Nilton de Moura Silva Júnior"
+date: "12/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## AnÃ¡lise de Base de Dados
+
+Para esta atividade, foi feito o download de dados referÃªntes Ã : 1) matrix de abundÃ¢ncia de espÃ©cies de peixes (**spe**); 2) matrix espacial (**spa**) e matrix ambiental (**env**), como mostrado nas tabelas abaixo.
+
+```{r}
+load("G:/Meu Drive/R/NEwR-2ed_code_data (2)/NEwR-2ed_code_data/NEwR2-Data/Doubs.RData")
+```
+
+## spe
+```{r}
+spe
+```
+
+## spa
+```{r}
+spa
+```
+
+## env
+```{r}
+env
+```
+
+
+## Perguntas
+Com esses dados, trÃªs perguntas inicais foram feitas: 1) dos 30 locais amostrados, qual desses apresentam a maior abundÃ¢ncia no nÂº de peixes? 2) E qual apresenta menos? 3) HÃ¡ um gradiente de abundÃ¢ncia com relaÃ§Ã£o ao rio?
+
