@@ -6,7 +6,7 @@ library(vegan)
 
 # Dados ----
 
-### Importar ----
+## Importar ----
 
 dados <- list.files(path = "./dados",
                     full.names = TRUE)
