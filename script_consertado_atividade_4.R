@@ -8,6 +8,8 @@ library(crayon)
 
 library(performance)
 
+library(ggbeeswarm)
+
 library(ggview)
 
 # Dados ----
