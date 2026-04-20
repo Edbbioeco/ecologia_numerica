@@ -126,7 +126,7 @@ var <- riqueza_df_div |>
 
 var
 
-purrr::map(var, criar_anovas)
+purrr::walk(var, criar_anovas)
 
 ### Gráficos ----
 
