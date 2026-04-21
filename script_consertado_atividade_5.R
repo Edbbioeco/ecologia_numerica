@@ -167,3 +167,6 @@ glm_poisson <- glm(Riqueza ~ Tratamento,
                    data = macrofauna_df_div,
                    family = poisson())
 
+#### Performance do modelo ----
+
+glm_poisson |> DHARMa::simulateResiduals(plot = TRUE)
