@@ -201,3 +201,10 @@ glm_q1 |> summary()
 
 glm_q2 |> summary()
 
+### GLM de Beta ----
+
+#### Criar o modelo ----
+
+glm_beta <- glmmTMB::glmmTMB(eqhill ~ Tratamento,
+                             data = macrofauna_df_div,
+                             family = glmmTMB::beta_family())
