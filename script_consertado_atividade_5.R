@@ -195,3 +195,9 @@ glm_q1 |> DHARMa::simulateResiduals(plot = TRUE)
 
 glm_q2 |> DHARMa::simulateResiduals(plot = TRUE)
 
+#### Estatísticas do modelo ----
+
+glm_q1 |> summary()
+
+glm_q2 |> summary()
+
