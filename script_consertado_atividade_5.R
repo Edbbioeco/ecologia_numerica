@@ -44,3 +44,19 @@ purrr::map(dados, importar_dados)
 dados |>
   stringr::str_remove_all("dados/|.txt") |>
   mget(envir = globalenv())
+
+# Diversidade ----
+
+## Dataset: FlorestaTot ----
+
+### Tratar o dataset ----
+
+FlorestaTot <- FlorestaTot |>
+  tidyr::pivot_longer(cols = dplyr::where(is.numeric),
+                      names_to = "Locais",
+                      values_to = "abundancia") |>
+  tidyr::pivot_wider(names_from = sps,
+                     values_from = abundancia)
+
+FlorestaTot
+
