@@ -60,3 +60,16 @@ FlorestaTot <- FlorestaTot |>
 
 FlorestaTot
 
+
+### Data frame de diversidade ----
+
+florestatot_df_div <- data.frame(com = FlorestaTot$Locais) |>
+  dplyr::bind_cols(FlorestaTot |>
+                     dplyr::select(-1) |>
+                     vegan::renyi(scales = 0:2, hill = TRUE)) |>
+  dplyr::rename("Riqueza" = `0`,
+                "Q1" = `1`,
+                "Q2" = `2`) |>
+  dplyr::mutate(eqhill = Q2 / Q1)
+
+florestatot_df_div
