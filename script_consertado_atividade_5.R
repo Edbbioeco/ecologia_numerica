@@ -10,6 +10,8 @@ library(crayon)
 
 library(performance)
 
+library(DHARMa)
+
 library(ggbeeswarm)
 
 library(magrittr)
