@@ -172,3 +172,7 @@ glm_poisson <- glm(Riqueza ~ Tratamento,
 #### Performance do modelo ----
 
 glm_poisson |> DHARMa::simulateResiduals(plot = TRUE)
+
+#### Estatísticas do modelo ----
+
+glm_poisson |> summary()
