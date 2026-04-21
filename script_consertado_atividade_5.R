@@ -112,3 +112,47 @@ macrofauna_df_div <- data.frame(Locais = macrofauna$locais,
 
 macrofauna_df_div
 
+### Modelos lineares ----
+
+criar_modelos <- function(var){
+
+  paste0("Criado o modelo para: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova <- aov(macrofauna_df_div[[var]] ~ Tratamento, data = macrofauna_df_div)
+
+  paste0("Pressupostos do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    performance::check_model(check = c("normality",
+                                       "homogeneity")) |>
+    print()
+
+  anova |>
+    performance::check_heteroscedasticity() |>
+    print()
+
+  anova |>
+    performance::check_normality() |>
+    print()
+
+  paste0("Estatísticas do modelo de: ", var) |>
+    crayon::yellow() |>
+    message()
+
+  anova |>
+    summary() |>
+    print()
+
+}
+
+var <- macrofauna_df_div |>
+  dplyr::select(3:6) |>
+  names()
+
+var
+
+purrr::walk(var, criar_modelos)
