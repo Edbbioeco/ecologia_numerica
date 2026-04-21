@@ -73,3 +73,15 @@ florestatot_df_div <- data.frame(com = FlorestaTot$Locais) |>
   dplyr::mutate(eqhill = Q2 / Q1)
 
 florestatot_df_div
+
+### Gráfico ----
+
+florestatot_df_div |>
+  tidyr::pivot_longer(cols = dplyr::where(is.numeric),
+                      names_to = "tipo",
+                      values_to = "Diversidade") |>
+  ggplot(aes(com, Diversidade)) +
+  geom_col() +
+  facet_wrap(~tipo, scales = "free_y") +
+  theme_classic() +
+  ggview::canvas(height = 10, width = 12)
