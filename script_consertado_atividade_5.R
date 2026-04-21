@@ -38,3 +38,9 @@ importar_dados <- function(dados){
 }
 
 purrr::map(dados, importar_dados)
+
+## Visualizar ----
+
+dados |>
+  stringr::str_remove_all("dados/|.txt") |>
+  mget(envir = globalenv())
