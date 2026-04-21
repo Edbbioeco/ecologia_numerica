@@ -176,3 +176,16 @@ glm_poisson |> DHARMa::simulateResiduals(plot = TRUE)
 #### Estatísticas do modelo ----
 
 glm_poisson |> summary()
+
+### GLM de Gamma: dados de Q1 e Q2 ----
+
+#### Criar os modelos ----
+
+glm_q1 <- glm(Q1 ~ Tratamento,
+              data = macrofauna_df_div,
+              family = Gamma())
+
+glm_q2 <- glm(Q2 ~ Tratamento,
+              data = macrofauna_df_div,
+              family = Gamma())
+
