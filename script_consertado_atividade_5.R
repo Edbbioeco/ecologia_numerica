@@ -112,7 +112,10 @@ macrofauna_df_div <- data.frame(Locais = macrofauna$locais,
   dplyr::rename("Riqueza" = `0`,
                 "Q1" = `1`,
                 "Q2" = `2`) |>
-  dplyr::mutate(eqhill = Q2 / Q1)
+  dplyr::mutate(eqhill = Q2 / Q1,
+                eqhill = dplyr::case_when(eqhill >= 1 ~ 0.9999,
+                                          eqhill <= 0 ~ 0.0001,
+                                          .default = eqhill |> round(5)))
 
 macrofauna_df_div
 
