@@ -14,8 +14,6 @@ library(DHARMa)
 
 library(ggbeeswarm)
 
-library(magrittr)
-
 # Dados ----
 
 ## Importar ----
