@@ -220,4 +220,14 @@ glm_beta |> DHARMa::simulateResiduals(plot = TRUE)
 
 glm_beta |> summary()
 
+### Gráficos ----
 
+macrofauna_df_div |>
+  tidyr::pivot_longer(cols = dplyr::where(is.numeric),
+                      names_to = "tipo",
+                      values_to = "Diversidade") |>
+  ggplot(aes(Tratamento, Diversidade)) +
+  ggbeeswarm::geom_quasirandom(width = 0.1) +
+  facet_wrap(~tipo, scales = "free_y") +
+  theme_classic() +
+  ggview::canvas(height = 10, width = 12)
