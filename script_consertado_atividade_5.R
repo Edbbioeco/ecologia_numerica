@@ -161,7 +161,7 @@ var
 
 purrr::walk(var, criar_modelos)
 
-### GLM de poisson; dados de riqueza ----
+### GLM de poisson: dados de riqueza ----
 
 #### criar o modelo -----
 
