@@ -211,3 +211,7 @@ glm_q2 |> summary()
 glm_beta <- glmmTMB::glmmTMB(eqhill ~ Tratamento,
                              data = macrofauna_df_div,
                              family = glmmTMB::beta_family())
+
+### Performance do modelo ----
+
+glm_beta |> DHARMa::simulateResiduals(plot = TRUE)
