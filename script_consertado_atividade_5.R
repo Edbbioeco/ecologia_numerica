@@ -189,3 +189,9 @@ glm_q2 <- glm(Q2 ~ Tratamento,
               data = macrofauna_df_div,
               family = Gamma())
 
+#### Performance do modelo ----
+
+glm_q1 |> DHARMa::simulateResiduals(plot = TRUE)
+
+glm_q2 |> DHARMa::simulateResiduals(plot = TRUE)
+
