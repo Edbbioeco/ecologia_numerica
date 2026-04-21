@@ -158,3 +158,12 @@ var <- macrofauna_df_div |>
 var
 
 purrr::walk(var, criar_modelos)
+
+### GLM de poisson; dados de riqueza ----
+
+#### criar o modelo -----
+
+glm_poisson <- glm(Riqueza ~ Tratamento,
+                   data = macrofauna_df_div,
+                   family = poisson())
+
