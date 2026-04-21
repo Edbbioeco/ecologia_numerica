@@ -85,3 +85,15 @@ florestatot_df_div |>
   facet_wrap(~tipo, scales = "free_y") +
   theme_classic() +
   ggview::canvas(height = 10, width = 12)
+
+## Dataset: macrofauna ----
+
+### Tratar o dataset ----
+
+macrofauna <- macrofauna |>
+  dplyr::mutate(Tratamento = locais |>
+                  stringr::str_sub(start = 1, end = 1))
+
+macrofauna
+
+macrofauna |> dplyr::glimpse()
