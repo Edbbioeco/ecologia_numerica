@@ -97,3 +97,18 @@ macrofauna <- macrofauna |>
 macrofauna
 
 macrofauna |> dplyr::glimpse()
+
+### Data frame de diversidade -----
+
+macrofauna_df_div <- data.frame(Locais = macrofauna$locais,
+                                Tratamento = macrofauna$Tratamento) |>
+  dplyr::bind_cols(macrofauna |>
+                     dplyr::select(dplyr::where(is.numeric)) |>
+                     vegan::renyi(scales = 0:2, hill = TRUE)) |>
+  dplyr::rename("Riqueza" = `0`,
+                "Q1" = `1`,
+                "Q2" = `2`) |>
+  dplyr::mutate(eqhill = Q2 / Q1)
+
+macrofauna_df_div
+
