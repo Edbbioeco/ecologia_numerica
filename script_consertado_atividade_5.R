@@ -215,3 +215,9 @@ glm_beta <- glmmTMB::glmmTMB(eqhill ~ Tratamento,
 ### Performance do modelo ----
 
 glm_beta |> DHARMa::simulateResiduals(plot = TRUE)
+
+#### Estatísticas do modelo ----
+
+glm_beta |> summary()
+
+
