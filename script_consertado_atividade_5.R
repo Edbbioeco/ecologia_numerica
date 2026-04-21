@@ -101,7 +101,9 @@ macrofauna |> dplyr::glimpse()
 ### Data frame de diversidade -----
 
 macrofauna_df_div <- data.frame(Locais = macrofauna$locais,
-                                Tratamento = macrofauna$Tratamento) |>
+                                Tratamento = c(rep("Superior", 12),
+                                               rep("Médio", 18),
+                                               rep("Inferior",12))) |>
   dplyr::bind_cols(macrofauna |>
                      dplyr::select(dplyr::where(is.numeric)) |>
                      vegan::renyi(scales = 0:2, hill = TRUE)) |>
