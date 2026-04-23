@@ -43,4 +43,4 @@ modelos_curvas
 
 ## Plotar ----
 
-modelos_curvas |> plot()
+modelos_curvas |> plot(log = "y")
