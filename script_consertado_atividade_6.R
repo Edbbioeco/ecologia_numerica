@@ -27,3 +27,7 @@ modelos_curvas <- riqueza |>
   vegan::radfit()
 
 modelos_curvas
+
+## Plotar ----
+
+modelos_curvas |> plot()
