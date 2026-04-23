@@ -17,3 +17,13 @@ riqueza <- readr::read_table("./dados/riqueza.txt")
 riqueza
 
 riqueza |> dplyr::glimpse()
+
+# Curva de abundância ----
+
+## Calcular modelos -----
+
+modelos_curvas <- riqueza |>
+  tibble::column_to_rownames(var = "sp1") |>
+  vegan::radfit()
+
+modelos_curvas
